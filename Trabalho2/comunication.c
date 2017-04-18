@@ -1,5 +1,6 @@
 #include <signal.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -26,21 +27,28 @@ void reader(FILE* stream)
 }
 
 
-int main()
-{
-  int fds[2];
+
+
+int main(){
+  int pslow[2];
+  int pfast[2];
+  int random = rand() % 3;
+  int index = 0;
 
   pid_t slow;
+  pid_t fast;
 
-  pipe(fds);
+  pipe(pslow);
 
   slow = fork();
 
-  if(slow ==(pid_t) 0)
-  {
+  if(slow == 0){
+
+    printf("Slow process\n");
+
     FILE* stream;
 
-    close(fds[0]);
+    close(pslow[0]);
 
     char *message = (": Mensagem 01 do filho dorminhoco");
 
@@ -48,27 +56,53 @@ int main()
 
     writer(message, stream);
 
-    close(fds[1]);
+    close(pslow[1]);
 
   } else {
-    FILE* stream;
+    fast = fork();
 
-    stream = fopen("output.txt", "wb");
+    pipe(pfast);
 
-    close(fds[1]);
+    if(fast == 0){
+      printf("Fast process\n");
 
-    reader(stream);
+      FILE* stream;
 
-    close(fds[0]);
+      close(pfast[0]);
 
-    sleep(30);
+      char *message2 = (": Mensagem 01 do usuario:<>");
 
-    kill(getpid(), SIGKILL);
+      stream = fopen("output.txt", "wb");
 
-    fclose(stream);
+      writer(message2, stream);
 
+      close(pfast[1]);
+    } else {
+
+      printf("Parent process\n");
+
+      FILE* stream;
+
+      stream = fopen("output.txt", "wb");
+
+      close(pslow[1]);
+
+      close(pfast[1]);
+
+      reader(stream);
+
+      close(pslow[0]);
+
+      close(pfast[0]);
+
+      sleep(3);
+
+      kill(getpid(), SIGKILL);
+
+      fclose(stream);
+
+    }
   }
   return 0;
-
 
 }
