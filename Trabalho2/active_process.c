@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/time.h>
 
-#include "active_process.h"
+#include "childs.h"
 #include "writers.h"
 #include "time_functions.h"
 
