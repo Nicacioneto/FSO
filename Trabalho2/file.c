@@ -9,9 +9,11 @@ void writer(const char* message, FILE* stream){
 
 void reader(FILE* stream){
   char buffer[1024];
+  FILE* output = fopen("output.txt", "w");
 
-  while(!feof(stream)
-  && !ferror(stream)
-  && fgets(buffer, sizeof(buffer), stream) != NULL)
-  fputs(buffer, stdout);
+  while(!feof(stream) && !ferror(stream)&& fgets(buffer, sizeof(buffer), stream) != NULL) {
+  	writer(buffer, output);
+  }
+
+  close(output);
 }

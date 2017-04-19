@@ -6,3 +6,14 @@ comunication.o: comunication.c file.h
 
 file.o: file.c
 	gcc $(CFLAGS) -c file.c
+
+active_process: active_process.o
+	gcc $(CFLAGS) -o active_process.o
+
+active_process.o: active_process.c
+	gcc $(CFLAGS) -c active_process.c
+
+clean:
+		rm -f *.o
+		rm -f *.txt
+		rm -f *.out
