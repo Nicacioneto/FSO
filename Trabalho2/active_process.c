@@ -3,19 +3,26 @@
 #include <unistd.h>
 
 #include "active_process.h"
-void execute_active_process(pid_t active_process_pipe[2]) {
+#include "writers.h"
+#include "time_functions.h"
+
+void execute_active_process(pid_t active_process_pipe[2], struct timeval *time_begin) {
   close (active_process_pipe[0]); // close read
 
-  FILE* stream;
-  stream = fdopen (active_process_pipe[1], "w");
+  FILE* pipe;
+  pipe = fdopen (active_process_pipe[1], "w");
 
+  int i = 1;
   while(1) {
-    printf("child\n");
-    char message[100];
-    scanf("%s", message);
+    char message_user[100];
+    scanf("%s", message_user);
 
-    printf("%s\n", message);
-    writer(message, stream);
+    struct timeval time_end, time_elapsed;
+    gettimeofday(&time_end, NULL);
+
+    calcute_time_elapsed(time_begin, &time_end, &time_elapsed);
+
+    writer_pipe_active_process(message_user, &time_elapsed, pipe, i++);
   }
 
   close (active_process_pipe[1]);

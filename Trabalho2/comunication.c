@@ -3,11 +3,12 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <sys/time.h>
 #include <unistd.h>
 
-#include "file.h"
+#include "writers.h"
 #include "active_process.h"
+
+
 
 int main(){
   int active_process_pipe[2];
@@ -18,17 +19,19 @@ int main(){
 
   /* Active child process */
   if (active_process == (pid_t)0) {
-    execute_active_process(active_process_pipe);
+    struct timeval time_begin;
+    gettimeofday(&time_begin, NULL);
+
+    execute_active_process(active_process_pipe, &time_begin);
   }
-  
+
   /* Parent process */
   else {
-
-    printf("dad\n");
     close (active_process_pipe[1]); // close write
-    FILE* stream;
-    stream = fdopen (active_process_pipe[0], "r");
-    reader (stream);
+
+    FILE* pipe;
+    pipe = fdopen (active_process_pipe[0], "r");
+    get_message_pipe_and_write_file (pipe);
 
     close(active_process_pipe[0]);
   }

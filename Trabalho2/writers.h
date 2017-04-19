@@ -1,0 +1,7 @@
+#ifndef GENERATE_OUTPUT_H
+#define GENERATE_OUTPUT_H
+
+void writer_pipe_active_process(const char* message, struct timeval *time_elapsed, FILE* pipe, int i);
+void get_message_pipe_and_write_file(FILE* pipe);
+
+#endif
