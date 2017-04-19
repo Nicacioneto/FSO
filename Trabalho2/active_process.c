@@ -2,11 +2,21 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include "active_process.h"
+void execute_active_process(pid_t active_process_pipe[2]) {
+  close (active_process_pipe[0]); // close read
 
-int main(int argc, char const *argv[]) {
-  char message[100];
-  int file_fifo = open(argv[1], "r");
-  read(file_fifo, message, 100);
-  printf("message = %s\n", message);
-  return 0;
+  FILE* stream;
+  stream = fdopen (active_process_pipe[1], "w");
+
+  while(1) {
+    printf("child\n");
+    char message[100];
+    scanf("%s", message);
+
+    printf("%s\n", message);
+    writer(message, stream);
+  }
+
+  close (active_process_pipe[1]);
 }

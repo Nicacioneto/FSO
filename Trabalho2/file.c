@@ -3,6 +3,7 @@
 #include "file.h"
 
 void writer(const char* message, FILE* stream){
+  printf("Writing: %s\n", message);
   fprintf(stream, "%s\n", message);
   fflush(stream);
 }

@@ -1,14 +1,11 @@
-comunication: file.o comunication.o
-	gcc $(CFLAGS) -o comunication file.o comunication.o
+comunication: file.o comunication.o active_process.o
+	gcc $(CFLAGS) -o comunication file.o comunication.o active_process.o
 
 comunication.o: comunication.c file.h
 	gcc $(CFLAGS) -c comunication.c
 
 file.o: file.c
 	gcc $(CFLAGS) -c file.c
-
-active_process: active_process.o
-	gcc $(CFLAGS) -o active_process.o
 
 active_process.o: active_process.c
 	gcc $(CFLAGS) -c active_process.c
