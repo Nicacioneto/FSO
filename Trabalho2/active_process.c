@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-#include "childs.h"
+#include "children.h"
 #include "writers.h"
 #include "time_functions.h"
 
@@ -23,7 +23,8 @@ void execute_active_process(pid_t active_process_pipe[2], struct timeval *time_b
 
     calcute_time_elapsed(time_begin, &time_end, &time_elapsed);
 
-    writer_pipe_active_process(message_user, &time_elapsed, pipe, i++);
+    writer_pipe_active_process(message_user, &time_elapsed, pipe, i);
+    i++;
   }
 
   close (active_process_pipe[1]);

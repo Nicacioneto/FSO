@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-#include "childs.h"
+#include "children.h"
 #include "writers.h"
 #include "time_functions.h"
 
@@ -16,7 +16,6 @@ void execute_lazy_child(pid_t lazy_child_pipe[2], struct timeval *time_begin) {
   int i = 1;
   while(1) {
     int random = rand() % 3;
-    printf("%d\n", random);
     sleep (random);
 
     struct timeval time_end, time_elapsed;

@@ -10,13 +10,12 @@ writers.o: writers.c
 time_functions.o: time_functions.c
 	gcc $(CFLAGS) -c time_functions.c
 
-active_process.o: active_process.c childs.h time_functions.h
+active_process.o: active_process.c children.h time_functions.h
 	gcc $(CFLAGS) -c active_process.c
 
-lazy_child.o: lazy_child.c childs.h time_functions.h
+lazy_child.o: lazy_child.c children.h time_functions.h
 	gcc $(CFLAGS) -c lazy_child.c
 
 clean:
 		rm -f *.o
 		rm -f *.txt
-		rm -f *.out
