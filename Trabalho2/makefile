@@ -1,8 +1,8 @@
-comunication: writers.o comunication.o active_process.o lazy_child.o time_functions.o
-	gcc $(CFLAGS) -o comunication writers.o comunication.o active_process.o lazy_child.o time_functions.o
+main: writers.o main.o active_process.o lazy_child.o time_functions.o
+	gcc $(CFLAGS) -o main writers.o main.o active_process.o lazy_child.o time_functions.o
 
-comunication.o: comunication.c writers.h
-	gcc $(CFLAGS) -c comunication.c
+main.o: main.c writers.h
+	gcc $(CFLAGS) -c main.c
 
 writers.o: writers.c
 	gcc $(CFLAGS) -c writers.c
@@ -17,5 +17,5 @@ lazy_child.o: lazy_child.c children.h time_functions.h
 	gcc $(CFLAGS) -c lazy_child.c
 
 clean:
-		rm -f *.o
-		rm -f *.txt
+	rm -f *.o
+	rm -f *.txt
