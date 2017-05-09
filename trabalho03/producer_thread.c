@@ -52,7 +52,10 @@ void* control_producer_thread (void* threads_args) {
 
       vector_information->vector[vector_information->current_position] = number;
       vector_information->current_position ++;
-      vector_information->biggest_vector_occupation ++;
+
+      if (vector_information->current_position > vector_information->biggest_vector_occupation) {
+        vector_information->biggest_vector_occupation = vector_information->current_position;
+      }
 
       fprintf(vector_information->file, "[producao]: Numero gerado: %d\n", number);
       pthread_testcancel (); // thread cancellation point

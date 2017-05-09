@@ -1,7 +1,6 @@
 #include <pthread.h>
 #include <stdio.h>
-#include <assert.h>
-#include <signal.h>
+#include <stdlib.h>
 
 #include "producer_thread.h"
 #include "vector_information.h"
@@ -9,12 +8,20 @@
 #include "controller_thread.h"
 
 int main(int argc, char const *argv[]) {
-  assert (argc > 1);
+  char *file_name;
+  if (argc < 2) { // user didn't informe the log file name
+    file_name = (char*) malloc (100 * sizeof(char));
+
+    printf("Nome do arquivo de log nao informado. Por favor informe: ");
+    scanf("%s", file_name);
+  }
+  else {
+    file_name = (char*) argv[1];
+  }
 
   VectorInformation vector_information;
   pthread_t producer_thread, consumer_thread_a, consumer_thread_b, controller_thread;
 
-  char *file_name = (char*) argv[1];
   vector_information = init_vector_information (file_name);
 
   pthread_create (&producer_thread, NULL, &control_producer_thread, &vector_information);
