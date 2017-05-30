@@ -2,10 +2,16 @@
 
 int calculaFatorial(int num){
   int resultado = num;
-  num -=1;
-  while(num>0){
-    resultado *= num;
-    num --;
+  if(num == 0)
+  {
+    resultado = 1;
+  } else
+  {
+    num -=1;
+    while(num>0){
+      resultado *= num;
+      num --;
+    }
   }
     return resultado;
 }
@@ -31,7 +37,7 @@ double seno(double angulo){
 
   double somador = 0, dividendo = 0;
 
-  int divisor=0, fat=0, sinal = -1, k = 0;
+  int divisor=0, sinal = -1, k = 0;
   //Calcula a série
   for(k=0;k<4;k++){
     sinal=-sinal;
@@ -42,6 +48,22 @@ double seno(double angulo){
   return somador;
 }
 
+double arc_seno(double seno){
+  double somador = 0, dividendo = 0;
+  int k = 0, divisor = 0;
+
+  if(seno<1){
+      for(k=0;k<4;k++){
+        dividendo = power(seno, 1+2*k)*(1.0/2.0)*k;
+        printf("dividendo = %lf  ",dividendo);
+        divisor = calculaFatorial(k)+2*k*calculaFatorial(k);
+        printf("divisor = %d\n",divisor);
+        somador+=dividendo/divisor;
+      }
+    }
+    return somador;
+
+}
 
 int main(){
 
@@ -49,4 +71,5 @@ double angulo = 0;
   printf("Informe o valor de x\n");
   scanf("%lf",&angulo);
   printf("seno = %lf\n",seno(angulo));
+  printf("arc_seno = %lf\n",arc_seno(seno(angulo)));
 }
