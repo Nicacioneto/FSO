@@ -1,40 +1,52 @@
-double power(double base, int exp) {
+#include <stdio.h>
 
-    if( exp == 0)
+int calculaFatorial(int num){
+  int resultado = num;
+  num -=1;
+  while(num>0){
+    resultado *= num;
+    num --;
+  }
+    return resultado;
+}
+
+double power(double x, int y)
+{
+    double temp;
+    if( y == 0)
        return 1;
-    double temp = power(base, exp/2);
-    if (exp%2 == 0)
+    temp = power(x, y/2);
+    if (y%2 == 0)
         return temp*temp;
-    else {
-        if(exp > 0)
-            return base*temp*temp;
+    else
+    {
+        if(y > 0)
+            return x*temp*temp;
         else
-            return (temp*temp)/base; //negative exponent computation
+            return (temp*temp)/x;
     }
+}
 
+double seno(double angulo){
+
+  double somador = 0, dividendo = 0;
+
+  int divisor=0, fat=0, sinal = -1, k = 0;
+  //Calcula a série
+  for(k=0;k<4;k++){
+    sinal=-sinal;
+    dividendo = sinal*power(angulo,(1 + 2*k));
+    divisor = calculaFatorial(1+2*k);
+    somador += dividendo/divisor;
+  }
+  return somador;
 }
 
 
-double seno(double angulo){
-  int a,sinal,b,c;
-	double fat,rad,soma,expoente;
-	soma=0;
-	sinal=1;
-	expoente=1;
-	fat=1;
-	b=1;
-  rad=angulo*3.1415/180;
+int main(){
 
-  for(a=1;a<=3;a+=1)
-	{
-		for(c=1;c<=b;c+=1)
-			  fat=fat*c;
-	  soma=soma+sinal*power(rad,expoente)/fat;
-		expoente+=2;
-		b+=2;
-		fat=1;
-		sinal=-sinal;
- }
-
-    return soma;
+double angulo = 0;
+  printf("Informe o valor de x\n");
+  scanf("%lf",&angulo);
+  printf("seno = %lf\n",seno(angulo));
 }
