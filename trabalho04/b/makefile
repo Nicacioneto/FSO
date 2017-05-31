@@ -1,11 +1,15 @@
 main: main.o libseno.so
-	gcc $(CFLAGS) -o main main.o -L. -lseno
+	 gcc -o main main.o -L. -lseno -Wl,-rpath,./
 
-main.o: main.c libseno.so
-	gcc $(CFLAGS) -c main.c
+main.o: main.c
+	gcc -c main.c
 
-libseno.so: libseno.c
-	gcc $(CFLAGS) -shared -fPIC libseno.c -o libseno.so
+libseno.so: libseno.o
+	gcc -shared -fPIC -o libseno.so libseno.o
+
+libseno.o: libseno.c
+	gcc -fPIC -o libseno.o -c libseno.c
 
 clean:
 		rm -f *.o
+		rm -f *.so

@@ -7,7 +7,7 @@ int main(int argc, char const *argv[]) {
   if (argc == 3){
     const char* short_options = "as";
 
-    int opcao =  getopt (argc, argv, short_options);
+    int opcao = getopt (argc, argv, short_options);
     double angulo = strtod (argv[2], NULL);
     double valor_seno, arcoseno;
 
