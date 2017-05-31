@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "libseno.h"
 
 int calculaFatorial(int num){
   int resultado = num;
@@ -63,13 +64,4 @@ double arc_seno(double seno){
     }
     return somador;
 
-}
-
-int main(){
-
-double angulo = 0;
-  printf("Informe o valor de x\n");
-  scanf("%lf",&angulo);
-  printf("seno = %lf\n",seno(angulo));
-  printf("arc_seno = %lf\n",arc_seno(seno(angulo)));
 }

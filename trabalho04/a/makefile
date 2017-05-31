@@ -1,7 +1,7 @@
 main: main.o libseno.a
 	 gcc -o main main.o -L. -lseno -Wl,-rpath,./
 
-main.o: main.c
+main.o: main.c libseno.h
 	gcc -c main.c
 
 libseno.a: libseno.o
@@ -12,5 +12,3 @@ libseno.o: libseno.c
 
 clean:
 		rm -f *.o
-		rm -f *.a
-		rm main
