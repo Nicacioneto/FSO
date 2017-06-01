@@ -50,18 +50,14 @@ double seno(double angulo){
 }
 
 double arc_seno(double seno){
-  double somador = 0, dividendo = 0;
-  int k = 0, divisor = 0;
-
-  if(seno<1){
-      for(k=0;k<4;k++){
-        dividendo = power(seno, 1+2*k)*(1.0/2.0)*k;
-        printf("dividendo = %lf  ",dividendo);
-        divisor = calculaFatorial(k)+2*k*calculaFatorial(k);
-        printf("divisor = %d\n",divisor);
-        somador+=dividendo/divisor;
-      }
+    double ultimo = seno;
+    double soma = seno;
+    int i = 1;
+    for(i=1;i<=1000;i++)
+    {
+        ultimo*=((seno*seno)*(2*i-1)*(2*i-1))/((2*i)*(2*i+1));
+        soma+=ultimo;
     }
-    return somador;
+    return soma;
 
 }
