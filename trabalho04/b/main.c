@@ -14,13 +14,13 @@ int main(int argc, char const *argv[]) {
     switch (opcao) {
       case SENO:
         valor_seno = seno(angulo);
-        printf("seno (%.2lf) = %.3lf\n", angulo, valor_seno);
+        printf("seno (%.2lf) = %.4lf\n", angulo, valor_seno);
         break;
       case ARCOSENO:
         valor_seno = seno(angulo);
         arcoseno = arc_seno(valor_seno);
 
-        printf("arc_seno (%.2lf) = %.3lf\n", valor_seno, arcoseno);
+        printf("arc_seno (%.2lf) = %.4lf\n", valor_seno, arcoseno);
         break;
       default:
         printf("Parametros incorretos.\n");
