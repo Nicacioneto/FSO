@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "libseno.h"
+#include "../libseno.h"
 
 int main(int argc, char const *argv[]) {
   if (argc == 3){

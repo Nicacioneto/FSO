@@ -9,7 +9,7 @@ int main(int argc, char const *argv[]) {
 
     double angulo = strtod (argv[2], NULL);
 
-    double (*funcao_seno)(double);
+    double (*funcao_seno)(double)
     double (*funcao_arc_seno)(double);
     double valor_seno = 0;
     double valor_arc_seno = 0;
@@ -24,12 +24,11 @@ int main(int argc, char const *argv[]) {
         dlclose (handle);
         break;
       case 'a':
-        valor_seno = (*funcao_seno)(angulo);
         *(void**) (&funcao_arc_seno) = dlsym (handle, "arc_seno");
-        valor_arc_seno = (*funcao_arc_seno)(valor_seno);
+        valor_arc_seno = (*funcao_arc_seno)(angulo);
         dlclose(handle);
 
-        printf("arc_seno (%.2lf) = %.4lf\n", valor_seno, valor_arc_seno);
+        printf("arc_seno (%.2lf) = %.4lf\n", angulo, valor_arc_seno);
         break;
       default:
         printf("Parametros incorretos.\n");
