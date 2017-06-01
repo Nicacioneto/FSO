@@ -9,7 +9,7 @@ int main(int argc, char const *argv[]) {
 
     double angulo = strtod (argv[2], NULL);
 
-    double (*funcao_seno)(double)
+    double (*funcao_seno)(double);
     double (*funcao_arc_seno)(double);
     double valor_seno = 0;
     double valor_arc_seno = 0;
