@@ -51,13 +51,14 @@ double seno(double angulo){
 
 double arc_seno(double seno){
     double ultimo = seno;
-    double soma = seno;
-    int i = 1;
-    for(i=1;i<=1000;i++)
+    double somador = seno;
+    int index = 1;
+    for(index=1;index<=1000;index++)
     {
-        ultimo*=((seno*seno)*(2*i-1)*(2*i-1))/((2*i)*(2*i+1));
-        soma+=ultimo;
+        ultimo*=((seno*seno)*(2*index-1)*(2*index-1));
+        ultimo/=((2*index)*(2*index+1));
+        somador+=ultimo;
     }
-    return soma;
+    return somador;
 
 }
